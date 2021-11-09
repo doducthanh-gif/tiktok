@@ -1,26 +1,26 @@
 import { useState } from "react";
 
 
-const order = [100,200,300]
+const gifts = [
+  'CPU i10',
+  'CPU i3',
+  'CPU i9'
+]
 
 function App() {
-  
-  const total  = order.reduce((total, cur) => total + cur)
+  const [gift, setGift] = useState()
 
-  // Khi đặt trên state là gì thì đặt thằng thứ 2 theo tên của nó là thêm set và theo quy ước Camel Case
-  const [counter, setCounter] = useState(()=>{
-    const total  = order.reduce((total, cur) => total + cur)
-    console.log(total)
-    return total
-  })
-  const handleIncrease = () => {
-    setCounter(preState => preState +1)
+  const randomGift = () => {
+    const index = Math.floor(Math.random() * gifts.length)
+    setGift(gifts[index])
+
+    console.log(index);
   }
-  
+
   return (
     <div className="App" style={{ padding: 20 }}>
-      <h1>{counter}</h1>
-      <button onClick={handleIncrease}>Increase</button>
+      <h1> {gift || 'Chưa có phần thưởng'} </h1>
+      <button onClick={randomGift}> Lấy phần thưởng</button>
     </div>
   );
 }
