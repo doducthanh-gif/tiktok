@@ -1,28 +1,45 @@
 import { useState } from "react";
 
+const courses = [
+  {
+    id: 1,
+    name: 'HTML, CSS'
+  },
+  {
+    id: 2,
+    name: 'JavaScript'
+  },
+  {
+    id: 3,
+    name: 'ReactJS'
+  }
 
-const order = [100,200,300]
+]
 
 function App() {
-  
-  const total  = order.reduce((total, cur) => total + cur)
+  const [checked, setChecked] = useState(2)
+  console.log(checked);
 
-  // Khi đặt trên state là gì thì đặt thằng thứ 2 theo tên của nó là thêm set và theo quy ước Camel Case
-  const [counter, setCounter] = useState(()=>{
-    const total  = order.reduce((total, cur) => total + cur)
-    console.log(total)
-    return total
-  })
-  const handleIncrease = () => {
-    setCounter(preState => preState +1)
+  const handleSubmit = () => {
+    // Call API
+    console.log({ id: checked });
+
   }
-  
   return (
     <div className="App" style={{ padding: 20 }}>
-      <h1>{counter}</h1>
-      <button onClick={handleIncrease}>Increase</button>
+      {courses.map(course => (
+        // Đặt key cho thẻ cấp cao nhất thì mới hết waring
+        <div key={course.id}>
+          <input type="radio"
+            onChange={() => setChecked(course.id)}
+            checked={checked === course.id}
+          />
+          {course.name}
+        </div>
+
+      ))}
+      <button onClick={handleSubmit}>Register</button>
     </div>
   );
 }
-
 export default App;
