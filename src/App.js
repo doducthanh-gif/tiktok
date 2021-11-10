@@ -1,28 +1,33 @@
 import { useState } from "react";
 
 
-const gifts = [
-  'CPU i10',
-  'CPU i3',
-  'CPU i9'
-]
-
 function App() {
-  const [gift, setGift] = useState()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
 
-  const randomGift = () => {
-    const index = Math.floor(Math.random() * gifts.length)
-    setGift(gifts[index])
+  const handleSubmit = () => {
+    // Call API
+    console.log({
+      name,
+      email
+    });
 
-    console.log(index);
   }
+
+  console.log(name);
 
   return (
     <div className="App" style={{ padding: 20 }}>
-      <h1> {gift || 'Chưa có phần thưởng'} </h1>
-      <button onClick={randomGift}> Lấy phần thưởng</button>
+      <input
+        value={name}
+        onChange={e => setName(e.target.value)}
+      />
+      <input
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+      />
+      <button onClick={handleSubmit}>ChangName</button>
     </div>
   );
 }
-
 export default App;
