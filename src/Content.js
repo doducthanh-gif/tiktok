@@ -7,6 +7,7 @@ function Content() {
     const [title, setTitle] = useState('')
     const [posts, setPosts] = useState([])
     const [type, setType] = useState('posts')
+    const [showGoToTop, setShowGoToTop] = useState(false)
 
     useEffect(() => {
         fetch(`https://jsonplaceholder.typicode.com/${type}`)
@@ -15,6 +16,20 @@ function Content() {
                 setPosts(posts);
             })
     }, [type])
+
+    useEffect(() => {
+
+        const handleScroll = () => {
+            setShowGoToTop(window.scrollY >= 200)
+        }
+        window.addEventListener('scroll', handleScroll)
+
+        return () => {
+        window.removeEventListener('scroll', handleScroll)
+            
+        }
+
+    }, [])
 
     return (
         <div>
@@ -42,6 +57,16 @@ function Content() {
                     <li key={post.id} >{post.title || post.name}</li>
                 ))}
             </ul>
+
+            {showGoToTop && (
+                <button style={{
+                    position: 'fixed',
+                    right: 20,
+                    bottom: 20,
+                }}>
+                    Go To Top
+                </button>
+            )}
         </div>
     )
 }
