@@ -20,11 +20,11 @@ function Content() {
         <div>
             {tabs.map(tab => (
                 <button
-                style = {type === tab ? {
-                    color : '#fff',
-                    backgroundColor :'#333'
+                    style={type === tab ? {
+                        color: '#fff',
+                        backgroundColor: '#333'
 
-                }: {} }
+                    } : {}}
                     key={tab}
                     onClick={() => (setType(tab))}
                 >
@@ -39,7 +39,7 @@ function Content() {
             <ul>
                 {posts.map(post => (
 
-                    <li key={post.id} >{post.title}</li>
+                    <li key={post.id} >{post.title || post.name}</li>
                 ))}
             </ul>
         </div>
