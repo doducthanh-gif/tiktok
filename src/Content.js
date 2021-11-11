@@ -1,34 +1,43 @@
 import { useEffect, useState } from "react"
 
+const citys = [
+    { id: 1, name: 'Ha Noi' },
+    { id: 2, name: 'Hai Phong' },
+    { id: 3, name: 'Hưng Yên' },
+
+]
+
 function Content() {
-    const [avatar, setAvatar] = useState()
+    const [lessonId, setLessonId] = useState(1)
 
     useEffect(() =>{
-        
-        // Cleanup
-        return () => {
-            avatar && URL.revokeObjectURL(avatar.preview)
+        const handleComment = ({ detail }) => {
+            console.log(detail);
         }
-
-    },[avatar])
-
-
-    const handlePreviewAvatar = (e) =>{
-        const file = e.target.files[0]
-
-        file.preview = URL.createObjectURL(file);
-
-        setAvatar(file)
-    }
+        window.addEventListener(`city-${lessonId}`,handleComment)
+        return () => {
+            window.removeEventListener(`city-${lessonId}`,handleComment)
+        }
+    },[lessonId])
 
     return (
         <div>
-            <input type="file" onChange= {handlePreviewAvatar} />
-            {avatar && (
-                <img src={avatar.preview} alt="" width = "50%" />
-            )}
+            <ul>
+                {citys.map(city => (
+                    <li
+                        key={city.id}
+                        style={{
+                            color: lessonId === city.id ? 'red' : 'green'
+                        }}
+                        onClick={() => setLessonId(city.id)}
+                    >
+                        {city.name}
+                    </li>
+                ))}
+            </ul>
+
         </div>
-        
+
     )
 }
 
