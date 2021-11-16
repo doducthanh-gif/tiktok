@@ -1,4 +1,5 @@
 import Content from "./Content"
+import Navabar from "./Navabar"
 import { useState } from "react";
 
 
@@ -9,7 +10,8 @@ function App() {
 
   return (
     <div className="App" style={{ padding: 20 }}>
-      <button  onClick  = {() => setShow(!show)} > Toggle </button>
+      <Navabar />
+      <button onClick={() => setShow(!show)} > Toggle </button>
       {show && <Content />}
     </div>
   );

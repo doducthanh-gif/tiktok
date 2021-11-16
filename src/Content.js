@@ -10,15 +10,15 @@ const citys = [
 function Content() {
     const [lessonId, setLessonId] = useState(1)
 
-    useEffect(() =>{
+    useEffect(() => {
         const handleComment = ({ detail }) => {
             console.log(detail);
         }
-        window.addEventListener(`city-${lessonId}`,handleComment)
+        window.addEventListener(`city-${lessonId}`, handleComment)
         return () => {
-            window.removeEventListener(`city-${lessonId}`,handleComment)
+            window.removeEventListener(`city-${lessonId}`, handleComment)
         }
-    },[lessonId])
+    }, [lessonId])
 
     return (
         <div>
